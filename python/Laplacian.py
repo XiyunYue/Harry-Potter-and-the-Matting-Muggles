@@ -6,7 +6,7 @@
 import numpy as np
 import cv2
 from change_SameColorform import change_SameColorform
-import scipy.special
+from scipy import ndimage
 
 def Laplacian_matting(trimap, img):
     '''
@@ -17,21 +17,32 @@ def Laplacian_matting(trimap, img):
     Returns:
         alpha: numpy.ndarray
     '''
-    fg = trimap > 0.9
-    bg = trimap < 0.01
-    unk = ~(fg | bg)
-    X, Y = np.where(unk == 1)
-    Laplacian = scipy.special.laplace(img)
-    alpha = np.zeros((x, y))
-    alpha[bg[:, :, 0]] = 0
-    alpha[fg[:, :, 0]] = 1
+
+    a,b = trimap.shape
+    alpha = np.zeros((a,b))
+
+    fg = (trimap > 0.9).astype(int)
+    bg = (trimap < 0.01).astype(int)
+    print(bg.shape)
+    unk = np.ones((trimap.shape))
+    unk = unk - fg - bg
+    a,b = trimap.shape
+    alpha = np.zeros((a,b))
+    b, g, r = cv2.split(img)
+    laplacian_b = cv2.Laplacian(b, cv2.CV_64F)
+    laplacian_g = cv2.Laplacian(g, cv2.CV_64F)
+    laplacian_r = cv2.Laplacian(r, cv2.CV_64F)
+    location = np.where(unk == 1)
+    X = location[0]
+    Y = location[1]
+
     
-    for i in unk:
-        for i in range(c):
-            alpha[X[k], Y[k]] += Laplacian[X[k], Y[k], i] ** 2
-    
-    alpha = 1 - np.sqrt(alpha / c)
-    alpha[bg[:, :, 0]] = 0
-    alpha[fg[:, :, 0]] = 1
-    
-    return alpha
+    for k in range(len(Y)):
+        alpha[X[k], Y[k]] += laplacian_b[X[k], Y[k]] ** 2 + laplacian_g[X[k], Y[k]] ** 2 + laplacian_r[X[k], Y[k]] ** 2 
+
+        alpha = 1 - np.sqrt(alpha / 3)
+        bg_x, bg_y = np.where(bg == 1)
+        alpha[bg_x, bg_y] = 0
+        fg_x, fg_y = np.where(fg == 1)
+        alpha[fg_x, fg_y] = 1
+        return alpha

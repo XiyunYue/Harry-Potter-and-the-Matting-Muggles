@@ -6,6 +6,10 @@ import cv2
 from test_SameSize import test_SameSize
 from change_SameColorform import change_SameColorform
 from test_alpha import test_alpha
+import scipy.special
+from Laplacian import Laplacian_matting
+
+
 
 img_trimap = cv2.imread('trimap.png')
 img_trimap = change_SameColorform(img_trimap)
@@ -33,7 +37,19 @@ background_input = cv2.imread('background.png')
 background_input = change_SameColorform(background_input)
 f = test_SameSize(output_alpha, background_input)
 print("Size of output alpha and background are", f)
-img_new = combining(output_alpha, background_input, img_input)
+
+
+Laplacian_alpha = Laplacian_matting(img_trimap, img_input)
+# a = Laplacian_alpha.dtype
+# max_value = np.amax(Laplacian_alpha)
+# print(max_value)
+
+
+g = test_SameSize(Laplacian_alpha, background_input)
+
+print("Size of Laplacian alpha and background are", g)
+
+img_new = combining(Laplacian_alpha, background_input, img_input)
 
 cv2.imshow('Composite Image', img_new)
 cv2.waitKey(0)
