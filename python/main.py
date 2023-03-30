@@ -22,7 +22,7 @@ b = test_SameSize(img_trimap, img_input)
 print("Size of trimap and input image are", b)
 
 ##
-output_alpha = cv2.imread('output_alpha.png')###
+output_alpha = cv2.imread('output_alpha.png')
 output_alpha = change_SameColorform(output_alpha)
 c, output_alpha = test_alpha(output_alpha)
 print(c)
@@ -33,7 +33,7 @@ alpha_ground = cv2.imread('groundtruth.png')
 alpha_ground = change_SameColorform(alpha_ground)
 ndim_alpha = alpha_ground.ndim
 if ndim_alpha == 3:
-    alpha_ground  = alpha_ground [:,:,0]
+    alpha_ground = alpha_ground[:, :, 0]
 
 e = MSE_calculation(output_alpha, alpha_ground)
 print("The MSE of our output = ", e)
@@ -43,7 +43,6 @@ background_input = cv2.imread('background.png')
 background_input = change_SameColorform(background_input)
 f = test_SameSize(output_alpha, background_input)
 print("Size of output alpha and background are", f)
-
 
 
 # a = Laplacian_alpha.dtype
@@ -69,8 +68,6 @@ print("The MSE of Laplacian = ", h)
 
 # if __name__ == '__main__':
 #     unittest.main()
-
-
 
 
 img_Laplacian = combining(Laplacian_alpha, background_input, img_input)
