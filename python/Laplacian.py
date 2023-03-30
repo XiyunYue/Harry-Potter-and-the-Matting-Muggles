@@ -23,7 +23,7 @@ def Laplacian_matting(trimap, img):
 
     fg = (trimap > 0.9).astype(int)
     bg = (trimap < 0.01).astype(int)
-    print(bg.shape)
+
     unk = np.ones((trimap.shape))
     unk = unk - fg - bg
     a,b = trimap.shape
