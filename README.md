@@ -1,13 +1,20 @@
 # Implementation Steps for each method
 
 # Bayesian Matting
-a)	Load the image and trimap (initial segmentation of image into foreground, background, and unknown regions)
+a)	Load the image and trimap (initial segmentation of image into foreground, background, and unknown regions).
+
 b)	Convert the image to grayscale if it is not already in grayscale.
+
 c)	Calculate the alpha matte using the following steps: 
+
 d)	Estimate the foreground and background color distributions using the pixels in their respective regions of the trimap. 
+
 e)	For each pixel in the unknown region of the trimap, calculate the probability that it belongs to the foreground or background using Bayes' theorem and the color distributions. 
+
 f)	Use the probabilities to calculate the alpha matte for each pixel in the unknown region.
+
 g)	Refine the alpha matte using a post-processing method.
+
 h)	Composite the foreground onto a new background using the alpha matte.
 
 # Laplacian Matting
