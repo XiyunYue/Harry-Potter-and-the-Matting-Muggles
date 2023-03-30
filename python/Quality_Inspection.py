@@ -4,10 +4,7 @@
 # ==================================================
 "Create a function to calculate the MSE of the output "
 import numpy as np
-from PIL import Image
-import cv2
-from change_SameColorform import change_SameColorform
-
+import math
 
 def MSE_calculation(result, alpha_ground):
     '''
@@ -18,11 +15,21 @@ def MSE_calculation(result, alpha_ground):
         output: numpy.dtype
     '''
 
-    ndim_alpha = alpha_ground.ndim
-    if ndim_alpha == 3:
-        alpha_ground = alpha_ground[:, :, 0]
     x_max, y_max = result.shape
     n = x_max * y_max
     output = 0
     output += np.sum(np.square(alpha_ground - result)) / n
+    return output
+
+
+def PSNR_calculation(MSE):
+    '''
+    input the MSE result and calculate the PSNR for it
+    Args:
+        result: numpy.ndarray
+    Returns:
+        output: numpy.dtype
+    '''
+
+    output = 10 * math.log(1/MSE, 10)
     return output

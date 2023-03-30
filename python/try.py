@@ -1,6 +1,6 @@
 from test_Trimap import test_Trimap
 import numpy as np
-from MSE import MSE_calculation
+from Quality_Inspection import MSE_calculation
 from combining import combining
 import cv2
 from test_SameSize import test_SameSize

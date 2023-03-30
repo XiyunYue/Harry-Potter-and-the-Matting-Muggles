@@ -1,6 +1,5 @@
 from test_Trimap import test_Trimap
-import numpy as np
-from MSE import MSE_calculation
+from Quality_Inspection import MSE_calculation
 from combining import combining
 import cv2
 from test_SameSize import test_SameSize
@@ -72,3 +71,7 @@ cv2.waitKey(0)
 # background_array = np.array(background_input)
 # img_new = combining(alpha_array, background_array, input_array)
 # print(img_new)
+
+# a = Laplacian_alpha.dtype
+# max_value = np.amax(Laplacian_alpha)
+# print(max_value)

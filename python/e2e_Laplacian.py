@@ -7,7 +7,6 @@ from test_SameSize import test_SameSize
 from change_SameColorform import change_SameColorform
 from test_alpha import test_alpha
 from Laplacian import Laplacian_matting
-import unittest
 
 img_trimap = cv2.imread('trimap.png')
 img_trimap = change_SameColorform(img_trimap)
@@ -20,32 +19,25 @@ img_input = change_SameColorform(img_input)
 b = test_SameSize(img_trimap, img_input)
 print("Size of trimap and input image are", b)
 
-##
-output_alpha = cv2.imread('output_alpha.png')
-output_alpha = change_SameColorform(output_alpha)
-c, output_alpha = test_alpha(output_alpha)
-print(c)
-d = test_SameSize(output_alpha, img_trimap)
-print("Size of output alpha and trimap are", d)
-
 alpha_ground = cv2.imread('groundtruth.png')
 alpha_ground = change_SameColorform(alpha_ground)
 ndim_alpha = alpha_ground.ndim
 if ndim_alpha == 3:
     alpha_ground = alpha_ground[:, :, 0]
 
-e = MSE_calculation(output_alpha, alpha_ground)
-print("The MSE of our output = ", e)
-g = PSNR_calculation(e)
-print("The PSNR of our output = ", g)
-
 background_input = cv2.imread('background.png')
 background_input = change_SameColorform(background_input)
-f = test_SameSize(output_alpha, background_input)
-print("Size of output alpha and background are", f)
 
-img_new = combining(output_alpha, background_input, img_input)
+Laplacian_alpha = Laplacian_matting(img_trimap, img_input)
+g = test_SameSize(Laplacian_alpha, background_input)
+print("Size of Laplacian alpha and background are", g)
 
-cv2.imshow('Composite Image', img_new)
-cv2.waitKey(0)
+h = MSE_calculation(Laplacian_alpha, alpha_ground)
+print("The MSE of Laplacian = ", h)
+c = PSNR_calculation(h)
+print("The PSNR of Laplacian = ", c)
+
+img_Laplacian = combining(Laplacian_alpha, background_input, img_input)
+
+
 print("Done")
