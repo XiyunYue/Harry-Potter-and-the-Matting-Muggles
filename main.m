@@ -1,10 +1,16 @@
-%% Input
-trimap = imread('image\G01\trimap.png');
+clc
+clear all
+close all
+
+%% Input name of file
+trimap_filename = 'image\G01\trimap.png';
+% im_filename = 'image\G01\input.png';
 im = imread('image\G01\input.png');
 new_background = imread('image\G01\background.png');
 alpha_ground = imread('image\G01\groundtruth.png');
 
-%% Change form 
+%% get input matrix
+trimap = read_trimap(trimap_filename);
 alpha_ground = alpha_ground(:, :, 1);
 trimap = im2double(trimap);
 new_background = double(new_background);
@@ -27,4 +33,5 @@ imwrite(new_picture, 'image\G01\new_picture.png');
 
 %% Show combining result
 MSE_La = MSE_calculation(alpha_ground, alpha_La);
+PSNR = PSNR_calculation(MSE_La);
 % MSE_Ba = MSE_calculation(alpha_ground, alpha_Ba);  %change this to get Bayesian result alpha

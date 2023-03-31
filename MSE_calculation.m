@@ -9,6 +9,6 @@ function MSE = MSE_calculation(alpha_ground, result)
         end
     end
     MSE = sum_MSE / n;
-            
+
 
 
