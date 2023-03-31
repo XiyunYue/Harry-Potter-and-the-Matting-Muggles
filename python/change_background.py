@@ -4,9 +4,10 @@
 # ==================================================
 "Create a function to test images color format"
 import numpy as np
+import cv2
+import numpy as np
 
-
-def change_SameColorform(image):
+def change_background(image, background):
     '''
     input images, test the color format for it
     Args:
@@ -14,21 +15,20 @@ def change_SameColorform(image):
     Returns:
         outputs: numpy.ndarray
     '''
-    b= cv2.imread('image16/background.jpg')
+    i,j,k = image.shape
+
 
     # Get the original size of the image
-    height, width = img_input.shape[:2]
+    height, width = image.shape[:2]
 
-    # Set the desired width and height for the resized image
-    desired_width = 500
-    aspect_ratio = desired_width / float(width)
-    desired_height = int(height * aspect_ratio)
+    # # Set the desired width and height for the resized image
+    # desired_width = 500
+    # aspect_ratio = desired_width / float(width)
+    # desired_height = int(height * aspect_ratio)
 
     # Resize the image
-    resized_image = cv2.resize(b, (desired_width, desired_height))
+    resized_image = cv2.resize(background, (height, width))
 
     # Save the resized image
-    cv2.imwrite('resized_image.jpg', resized_image)
-    
-
-    return image
+    # cv2.imwrite('background.jpg', resized_image)
+    return resized_image
