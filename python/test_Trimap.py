@@ -1,29 +1,21 @@
 # Copyright 2023 by Xiaoru Liu, Trinity College Dublin. All rights reserved.
 #
-# This file is the function for testing the form for trimap.Can accept input image as 8-bitRGB and change it to normalized pixels.
-# Can accept trimap as 3D data and convert it to the correct format.
+# This file is the function for testing the form for trimap. Checking if the value in it are between 0,1
 # ==================================================
 "Create a function to test the form for trimap"
-import numpy as np
-from change_SameColorform import change_SameColorform
+import unittest
+from read_Trimap import read_Trimap
 
 
-def test_Trimap(trimap):
-    '''
-    input the trimap and test the form for it, change it to 1 channel
-    Args:
-        trimap: numpy.ndarray
-    Returns:
-        output: str
-        trimap:numpy.ndarray
-    '''
-    trimap = change_SameColorform(trimap)
-    ndim = trimap .ndim
-    if ndim == 3:
-        trimap = trimap[:, :, 0]
+class Test_Trimap(unittest.TestCase):
 
-    if np.any(np.logical_or(trimap > 1, trimap < 0)):
-        output = 'Trimap has something wrong'
-    else:
-        output = 'Trimap is ready'
-    return output, trimap
+    def testTrimap(self):
+        name = 'trimap.png'
+        result = read_Trimap(name)
+        for row in result:
+            for value in row:
+                self.assertGreaterEqual(value, 0)
+                self.assertLessEqual(value, 1)
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,4 +1,4 @@
-from test_Trimap import test_Trimap
+from read_Trimap import test_Trimap
 import numpy as np
 from Quality_Inspection import MSE_calculation
 from combining import combining

@@ -6,7 +6,7 @@
 import numpy as np
 
 
-def change_SameColorform(image):
+def change_Size(image):
     '''
     input images, test the color format for it
     Args:
@@ -14,9 +14,8 @@ def change_SameColorform(image):
     Returns:
         outputs: numpy.ndarray
     '''
-
-    max_value = np.amax(image)
-    if int(max_value) > 1:
-        image = image.astype("float64") / 255
+    ndim = image.ndim
+    if ndim == 3:
+        image = image[:, :, 0]
 
     return image

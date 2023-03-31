@@ -6,6 +6,20 @@
 import numpy as np
 import math
 
+
+def SAD_calculation(result, alpha_ground):
+    '''
+    input the output alpha and calculate the MSE for it
+    Args:
+        result: numpy.ndarray
+    Returns:
+        output: numpy.dtype
+    '''
+    SAD = 0
+    SAD = np.sum(abs(alpha_ground - result))
+    return SAD
+
+
 def MSE_calculation(result, alpha_ground):
     '''
     input the output alpha and calculate the MSE for it
@@ -15,10 +29,9 @@ def MSE_calculation(result, alpha_ground):
         output: numpy.dtype
     '''
 
-    x_max, y_max = result.shape
-    n = x_max * y_max
+    n = result.size
     output = 0
-    output += np.sum(np.square(alpha_ground - result)) / n
+    output = np.sum(np.square(alpha_ground - result)) / n
     return output
 
 

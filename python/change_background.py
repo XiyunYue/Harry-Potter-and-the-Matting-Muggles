@@ -14,9 +14,21 @@ def change_SameColorform(image):
     Returns:
         outputs: numpy.ndarray
     '''
+    b= cv2.imread('image16/background.jpg')
 
-    max_value = np.amax(image)
-    if int(max_value) > 1:
-        image = image.astype("float64") / 255
+    # Get the original size of the image
+    height, width = img_input.shape[:2]
+
+    # Set the desired width and height for the resized image
+    desired_width = 500
+    aspect_ratio = desired_width / float(width)
+    desired_height = int(height * aspect_ratio)
+
+    # Resize the image
+    resized_image = cv2.resize(b, (desired_width, desired_height))
+
+    # Save the resized image
+    cv2.imwrite('resized_image.jpg', resized_image)
+    
 
     return image
