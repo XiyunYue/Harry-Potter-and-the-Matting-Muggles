@@ -1,14 +1,14 @@
 # Copyright 2023 by Xiaoru Liu, Trinity College Dublin. All rights reserved.
 #
-# This file is the function for testing images color format and change them if there are not unit8
+# This file is the function for change alpha colour matrix become to one channel format
 # ==================================================
-"Create a function to test images color format"
+"Create a function to change colour to one channel format"
 import numpy as np
 
 
 def change_Size(image):
     '''
-    input images, test the color format for it
+    input images, test the color format for it and change three channel to one channel format
     Args:
         image: numpy.ndarray
     Returns:

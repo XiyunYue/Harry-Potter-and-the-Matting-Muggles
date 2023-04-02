@@ -1,15 +1,15 @@
 # Copyright 2023 by Xiaoru Liu, Trinity College Dublin. All rights reserved.
 #
-# This file is the function for calculate the MSE of the output
+# This file is the function for calculate the MSE,PSNR and SAD of the output
 # ==================================================
-"Create a function to calculate the MSE of the output "
+"Create a function to calculate the different quality assessment for the output "
 import numpy as np
 import math
 
 
 def SAD_calculation(result, alpha_ground):
     '''
-    input the output alpha and calculate the MSE for it
+    input the output alpha and calculate the SAD for it
     Args:
         result: numpy.ndarray
     Returns:

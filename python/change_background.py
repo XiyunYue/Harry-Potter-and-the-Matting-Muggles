@@ -2,21 +2,22 @@
 #
 # This file is the function for testing images color format and change them if there are not unit8
 # ==================================================
-"Create a function to test images color format"
+"Create a function to design backgrounds for different pictures."
 import numpy as np
 import cv2
 import numpy as np
 
+
 def change_background(image, background):
     '''
-    input images, test the color format for it
+    input background images and change it to the same size with input image
     Args:
         image: numpy.ndarray
+        background: numpy.ndarray
     Returns:
         outputs: numpy.ndarray
     '''
-    i,j,k = image.shape
-
+    i, j, k = image.shape
 
     # Get the original size of the image
     height, width = image.shape[:2]
@@ -27,7 +28,7 @@ def change_background(image, background):
     # desired_height = int(height * aspect_ratio)
 
     # Resize the image
-    resized_image = cv2.resize(background, (height, width))
+    resized_image = cv2.resize(background, (width, height))
 
     # Save the resized image
     # cv2.imwrite('background.jpg', resized_image)

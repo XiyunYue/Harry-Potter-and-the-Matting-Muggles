@@ -1,6 +1,6 @@
 # Copyright 2023 by Xiaoru Liu, Trinity College Dublin. All rights reserved.
 #
-# This file is the function for testing images color format and change them if there are not unit8
+# This file is the function for testing images color format and change them if there are unit8
 # ==================================================
 "Create a function to test images color format"
 import numpy as np

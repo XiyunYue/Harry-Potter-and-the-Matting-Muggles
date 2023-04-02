@@ -1,6 +1,6 @@
 # Copyright 2023 by Xiaoru Liu, Trinity College Dublin. All rights reserved.
 #
-# This file is the function for using Laplacian function for matting
+# This file is the function for calculate Laplacian result and output it in unknow area in alpha
 # ==================================================
 "Create a function to use Laplacian function for matting "
 import numpy as np

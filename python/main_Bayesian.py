@@ -1,7 +1,14 @@
+# Copyright 2023 by Xiaoru Liu, Trinity College Dublin. All rights reserved.
+#
+# This file is the function for calculate Bayes result and output it
+# ==================================================
+"Create a function to use Bayes function for matting "
+
+
 import numpy as np
 from scipy.ndimage.filters import gaussian_filter
 import cv2
-from numba import jit 
+from numba import jit
 
 from orchard_bouman_clust import clustFunc
 
@@ -28,13 +35,18 @@ def get_window(m, x, y, N):
     h, w, c = m.shape
     halfN = N//2
     r = np.zeros((N, N, c))
-    xmin = max(0, x - halfN); xmax = min(w, x + (halfN+1))
-    ymin = max(0, y - halfN); ymax = min(h, y + (halfN+1))
-    pxmin = halfN - (x-xmin); pxmax = halfN + (xmax-x)
-    pymin = halfN - (y-ymin); pymax = halfN + (ymax-y)
+    xmin = max(0, x - halfN)
+    xmax = min(w, x + (halfN+1))
+    ymin = max(0, y - halfN)
+    ymax = min(h, y + (halfN+1))
+    pxmin = halfN - (x-xmin)
+    pxmax = halfN + (xmax-x)
+    pymin = halfN - (y-ymin)
+    pymax = halfN + (ymax-y)
 
     r[pymin:pymax, pxmin:pxmax] = m[ymin:ymax, xmin:xmax]
     return r
+
 
 @jit(nopython=True, cache=True)
 def solve(mu_F, Sigma_F, mu_B, Sigma_B, C, sigma_C, alpha_init, maxIter, minLike):
@@ -86,13 +98,17 @@ def solve(mu_F, Sigma_F, mu_B, Sigma_B, C, sigma_C, alpha_init, maxIter, minLike
                 B = np.maximum(0, np.minimum(1, X[3:6]))
                 # solve for alpha
 
-                alpha = np.maximum(0, np.minimum(1, ((np.atleast_2d(C).T-B).T @ (F-B))/np.sum((F-B)**2)))[0,0]
+                alpha = np.maximum(0, np.minimum(
+                    1, ((np.atleast_2d(C).T-B).T @ (F-B))/np.sum((F-B)**2)))[0, 0]
                 # # calculate likelihood
-                L_C = - np.sum((np.atleast_2d(C).T -alpha*F-(1-alpha)*B)**2) * invsgma2
-                L_F = (- ((F- np.atleast_2d(mu_Fi).T).T @ invSigma_Fi @ (F-np.atleast_2d(mu_Fi).T))/2)[0,0]
-                L_B = (- ((B- np.atleast_2d(mu_Bj).T).T @ invSigma_Bj @ (B-np.atleast_2d(mu_Bj).T))/2)[0,0]
+                L_C = - np.sum((np.atleast_2d(C).T - alpha *
+                               F-(1-alpha)*B)**2) * invsgma2
+                L_F = (- ((F - np.atleast_2d(mu_Fi).T).T @ invSigma_Fi @
+                       (F-np.atleast_2d(mu_Fi).T))/2)[0, 0]
+                L_B = (- ((B - np.atleast_2d(mu_Bj).T).T @ invSigma_Bj @
+                       (B-np.atleast_2d(mu_Bj).T))/2)[0, 0]
                 like = (L_C + L_F + L_B)
-                #like = 0
+                # like = 0
 
                 if like > maxlike:
                     alphaMax = alpha
@@ -108,7 +124,7 @@ def solve(mu_F, Sigma_F, mu_B, Sigma_B, C, sigma_C, alpha_init, maxIter, minLike
     return FMax, BMax, alphaMax
 
 
-def bayesian_matte(img, trimap, sigma=8, N=25 , minN=10):
+def bayesian_matte(img, trimap, sigma=8, N=25, minN=10):
     # img = img/255
     h, w, c = img.shape
     alpha = np.zeros((h, w))
@@ -133,12 +149,13 @@ def bayesian_matte(img, trimap, sigma=8, N=25 , minN=10):
     unkreg = unknown_mask
 
     kernel = np.ones((3, 3))
+    m_j = 0
     while n < nUnknown:
         unkreg = cv2.erode(unkreg.astype(np.uint8), kernel, iterations=1)
         unkpixels = np.logical_and(np.logical_not(unkreg), unknown_mask)
 
         Y, X = np.nonzero(unkpixels)
-
+        m_i = 0
         for i in range(Y.shape[0]):
             if n % 100 == 0:
                 print(n, nUnknown)
@@ -169,6 +186,13 @@ def bayesian_matte(img, trimap, sigma=8, N=25 , minN=10):
 
             # if not enough data, return to it later...
             if len(f_weights) < minN or len(b_weights) < minN:
+                m_i = m_i + 1
+                # print("m_i:",m_i)
+                if (m_i == np.size(Y)):
+                    m_j = m_j + 1
+                    # print("m_j",m_j)
+                    if (m_j == 10):
+                        n = nUnknown
                 continue
             # Partition foreground and background pixels to clusters (in a weighted manner)
             mu_f, sigma_f = clustFunc(f_pixels, f_weights)
@@ -176,7 +200,8 @@ def bayesian_matte(img, trimap, sigma=8, N=25 , minN=10):
 
             alpha_init = np.nanmean(a.ravel())
             # Solve for F,B for all cluster pairs
-            f, b, alphaT = solve(mu_f, sigma_f, mu_b, sigma_b, p, 0.01, alpha_init, 50, 1e-6)
+            f, b, alphaT = solve(mu_f, sigma_f, mu_b, sigma_b,
+                                 p, 0.01, alpha_init, 50, 1e-6)
             foreground[y, x] = f.ravel()
             background[y, x] = b.ravel()
             alpha[y, x] = alphaT
@@ -199,6 +224,3 @@ def bayesian_matte(img, trimap, sigma=8, N=25 , minN=10):
 #     import matplotlib.pyplot as plt
 #     import scipy.misc
 #     main()
-
-
-

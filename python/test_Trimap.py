@@ -10,7 +10,7 @@ from read_Trimap import read_Trimap
 class Test_Trimap(unittest.TestCase):
 
     def testTrimap(self):
-        name = 'trimap.png'
+        name = 'image1/trimap.png'
         result = read_Trimap(name)
         for row in result:
             for value in row:

@@ -11,9 +11,11 @@ from read_Trimap import read_Trimap
 class test_Samesize(unittest.TestCase):
     
     def test_sameSize(self):
-        image_name = 'input.png'
+
+        
+        image_name = 'image1/input.png'
         image = read_image(image_name)
-        name = 'trimap.png'
+        name = 'image1/trimap.png'
         Trimap = read_Trimap(name)        
         alpha = bayesian_matte(image, Trimap, sigma=8, N=50 , minN=10)
         image = read_image(image_name)

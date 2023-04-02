@@ -1,14 +1,5 @@
 # Copyright 2023 by Xiaoru Liu, Trinity College Dublin. All rights reserved.
 #
-# This file is the function for test the form for image and trimap
-# ==================================================
-"Create a function to test the value of alpha matting image"
-import numpy as np
-from change_SameColorform import change_SameColorform
-
-
-# Copyright 2023 by Xiaoru Liu, Trinity College Dublin. All rights reserved.
-#
 # This file is the function for testing the form for trimap. Checking if the value in it are between 0,1
 # ==================================================
 "Create a function to test the form for trimap"
@@ -22,13 +13,17 @@ from read_Trimap import read_Trimap
 class Test_Trimap(unittest.TestCase):
 
     def testTrimap(self):
-        image_name = 'input.png'
+
+        image_name = 'image1/input.png'
         image = read_image(image_name)
-        name = 'trimap.png'
-        Trimap = read_Trimap(name)        
-        alpha = bayesian_matte(image, Trimap, sigma=8, N=50 , minN=10)
+        name = 'image1/trimap.png'
+        Trimap = read_Trimap(name)
+        alpha = bayesian_matte(image, Trimap, sigma=8, N=50, minN=10)
         for row in alpha:
-                self.assertIn(row, ["0", "1"])
+            self.assertGreaterEqual(alpha, 0)
+            self.assertLessEqual(alpha, 1)
+
+
 if __name__ == '__main__':
     unittest.main()
 
