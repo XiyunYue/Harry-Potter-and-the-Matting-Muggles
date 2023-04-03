@@ -1,6 +1,6 @@
 # Harry-Potter-and-the-Matting-Muggles
 
-# The objective of the project is to implement Bayesian Matting
+# Implementing Bayesian Matting
 
 Description of Bayesian Matting
 Bayesian matting is a technique used for image and video editing that allows for the extraction of a foreground object from its background in an image or a video. The algorithm uses a probabilistic model to estimate the foreground and background colors and the alpha matte, which is the per-pixel opacity or transparency of the foreground object.
