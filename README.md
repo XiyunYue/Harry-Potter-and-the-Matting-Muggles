@@ -20,11 +20,11 @@ Steps involved in Bayesian Matting and incorporated in this project:
  Performance Evaluation
 - For the operation of the entire algorithm we propose a time recording to avoid producing an overly complex or inefficient program.
 
-Unit test input
+Unit test - Input
 - Detect whether the read Trimap is in the correct form: detect the matrix data where the read Trimap is located. 
 - Avoid it consisting only of 0 or 1, no other data.
 
-Unit test algorithms
+Unit test - Algorithms
 - Check whether the output of the alpha matte is composed of 0’s and 1’s. 
 - If the output matte has either all 0’s or all 1’s it is invalid. If the output matte has any other value, it is invalid.  
 - Testing whether the color of our extracted foreground changes when combined with the new background. Lastly, check if the algorithm for combining the background is correct.
