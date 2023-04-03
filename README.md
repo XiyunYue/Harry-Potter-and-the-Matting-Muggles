@@ -1,6 +1,6 @@
 # Harry-Potter-and-the-Matting-Muggles
 
-# Implementing Bayesian Matting
+## Implementing Bayesian Matting
 
 Description of Bayesian Matting
 Bayesian matting is a technique used for image and video editing that allows for the extraction of a foreground object from its background in an image or a video. The algorithm uses a probabilistic model to estimate the foreground and background colors and the alpha matte, which is the per-pixel opacity or transparency of the foreground object.
@@ -14,8 +14,8 @@ Steps involved in Bayesian Matting:
 - We then use this α value to estimate the F and B values (1’s and 0’s) corresponding to the unknown region which is going to be the desired α matte. 
 - We can use this α matte to further superimpose various backgrounds by our foreground using the composite equation discussed in the math.
 
-# Implementation Steps for each method
-# Bayesian Matting
+## Implementation Steps for each method
+### Bayesian Matting
 a)	Load the image and trimap (initial segmentation of image into foreground, background, and unknown regions).
 
 b)	Convert the image to grayscale if it is not already in grayscale.
@@ -32,7 +32,7 @@ g)	Refine the alpha matte using a post-processing method.
 
 h)	Composite the foreground onto a new background using the alpha matte.
 
-# Laplacian Matting
+### Laplacian Matting
 a)	Load the image and trimap.
 
 b)	Convert the image to grayscale if it is not already in grayscale.
@@ -49,12 +49,12 @@ g)	Refine the alpha matte using a post-processing method such as Poisson matting
 
 h)	Composite the foreground onto a new background using the alpha matte.
 
-# Comparison between Bayesian and Laplacian Matting
+## Comparison between Bayesian and Laplacian Matting
 Bayesian matting: This method uses a Bayesian framework to estimate the foreground and background colors of a pixel based on the color values of its neighboring pixels, as well as the foreground and background colors of nearby known pixels. It also incorporates prior knowledge about the likelihood of a pixel being foreground or background based on its location in the image. Bayesian matting can produce high-quality mattes with accurate edges and fine details, but it can be computationally sensitive to the quality and quantity of the input data.
 
 Laplacian matting: This method uses a Laplacian equation to solve for the alpha matte, which represents the opacity of each pixel in the foreground object. It relies on the assumption that the color values of the foreground and background regions can be modeled by a linear combination of a small set of basis colors. Laplacian matting can be faster and more robust than Bayesian matting, especially for images with large and smooth background regions, but it may produce artifacts or errors in areas with complex or ambiguous color distributions.
 
-# Proposed End to End and Unit Tests
+## Proposed End to End and Unit Tests
  Performance Evaluation
 - For the operation of the entire algorithm we propose a time recording to avoid producing an overly complex or inefficient program.
 
