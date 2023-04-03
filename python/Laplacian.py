@@ -5,8 +5,6 @@
 "Create a function to use Laplacian function for matting "
 import numpy as np
 import cv2
-from change_SameColorform import change_SameColorform
-from scipy import ndimage
 
 
 def Laplacian_matting(trimap, img):

@@ -29,9 +29,8 @@ def MSE_calculation(result, alpha_ground):
         output: numpy.dtype
     '''
 
-    n = result.size
     output = 0
-    output = np.sum(np.square(alpha_ground - result)) / n
+    output =  np.mean(np.square(alpha_ground - result))
     return output
 
 

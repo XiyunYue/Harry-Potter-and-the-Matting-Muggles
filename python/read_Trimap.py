@@ -4,7 +4,6 @@
 # Can accept trimap as 3D data and convert it to the correct format.
 # ==================================================
 "Create a function to read the form for trimap"
-import numpy as np
 from change_SameColorform import change_SameColorform
 import cv2
 

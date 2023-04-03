@@ -3,7 +3,8 @@ import numpy as np
 # Implementation of orchard bouman clustering
 # Not the cleanest code
 # Might be faster if rewritten in all numpy, node object -> array
-# May be able to be spedup with numba. 
+# May be able to be spedup with numba.
+
 
 class Node(object):
 

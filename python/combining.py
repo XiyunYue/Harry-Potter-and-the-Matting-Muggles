@@ -4,8 +4,6 @@
 # ==================================================
 "Create a function to combine the foreground with a new background"
 import numpy as np
-from PIL import Image
-import cv2
 
 
 def combining(alpha, background, img):

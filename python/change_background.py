@@ -3,7 +3,6 @@
 # This file is the function for testing images color format and change them if there are not unit8
 # ==================================================
 "Create a function to design backgrounds for different pictures."
-import numpy as np
 import cv2
 import numpy as np
 

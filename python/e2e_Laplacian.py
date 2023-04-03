@@ -6,7 +6,6 @@
 
 from read_Trimap import read_Trimap
 from read_image import read_image
-import numpy as np
 from Quality_Inspection import MSE_calculation, PSNR_calculation, SAD_calculation
 from combining import combining
 import cv2
@@ -15,13 +14,13 @@ from Laplacian import Laplacian_matting
 from change_Size import change_Size
 from change_background import change_background
 
-trimap_name = 'image2/trimap.png'
+trimap_name = 'image1/trimap.png'
 img_trimap = read_Trimap(trimap_name)
 
-img_name = 'image2/input.png'
+img_name = 'image1/input.png'
 img_input = read_image(img_name)
 
-alpha_ground = cv2.imread('image2/groundtruth.png')
+alpha_ground = cv2.imread('image1/groundtruth.png')
 alpha_ground = change_SameColorform(alpha_ground)
 alpha_ground = change_Size(alpha_ground)
 

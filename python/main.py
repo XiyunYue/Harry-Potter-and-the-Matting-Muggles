@@ -13,29 +13,29 @@ import numpy as np
 import matplotlib.pyplot as plt
 from change_SameColorform import change_SameColorform
 from change_Size import change_Size
-from main_Bayesian import bayesian_matte
+from Bayessian_matte1 import Bayesian_Matte1
 from change_background import change_background
 
-trimap_name = 'image2/trimap.png'
+trimap_name = 'image4/trimap.png'
 img_trimap = read_Trimap(trimap_name)
 
-img_name = 'image2/input.png'
+img_name = 'image4/input.png'
 img_input = read_image(img_name)
 
 ##
-# output_alpha = cv2.imread('image2/output_alpha.png')
+# output_alpha = cv2.imread('image1/output_alpha.png')
 # output_alpha = change_SameColorform(output_alpha)
 # output_alpha = change_Size(output_alpha)
 ##
 
-output_alpha = bayesian_matte(img_input, img_trimap)
+output_alpha, unknow = Bayesian_Matte1(img_input, img_trimap)
 plt.imshow(output_alpha, cmap = "gray")
 plt.show()
 # a = output_alpha.dtype
 # max_value = np.amax(output_alpha)
 # print(max_value)
-nan_locs = np.isnan(output_alpha)
-print(np.argwhere(nan_locs))
+# nan_locs = np.isnan(output_alpha)
+# print(np.argwhere(nan_locs))
 
 
 output_alpha = change_SameColorform(output_alpha)
@@ -45,11 +45,11 @@ output_alpha = change_Size(output_alpha)
 # print(a)
 
 
-print(output_alpha.shape)
+# print(output_alpha.shape)
 img_uint8 = (output_alpha * 255).astype(np.uint8)
-cv2.imwrite('image2/output_alpha.png', img_uint8)
+cv2.imwrite('image4/output_alpha.png', img_uint8)
 
-alpha_ground = cv2.imread('image2/groundtruth.png')
+alpha_ground = cv2.imread('image4/groundtruth.png')
 # print(alpha_ground.shape)
 alpha_ground = change_SameColorform(alpha_ground)
 alpha_ground = change_Size(alpha_ground)
@@ -68,12 +68,12 @@ background_input = change_SameColorform(background_input)
 background_input = change_background(img_input, background_input)
 
 img_new = combining(output_alpha, background_input, img_input)
-a = img_new.dtype
-max_value = np.amax(img_new)
-print(a)
+# a = img_new.dtype
+# max_value = np.amax(img_new)
+# print(a)
 cv2.imshow('Composite Image', img_new)
 cv2.waitKey(0)
 img_uint8 = (img_new * 255).astype(np.uint8)
-cv2.imwrite('image2/combining_image.png', img_uint8)
+cv2.imwrite('image4/combining_image.png', img_uint8)
 
 print("Done")

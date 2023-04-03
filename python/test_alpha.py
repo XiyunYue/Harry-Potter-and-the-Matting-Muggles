@@ -6,7 +6,7 @@
 import unittest
 import numpy as np
 from read_image import read_image
-from main_Bayesian import bayesian_matte
+from Bayessian_matte1 import Bayesian_Matte1
 from read_Trimap import read_Trimap
 
 
@@ -18,7 +18,7 @@ class Test_Trimap(unittest.TestCase):
         image = read_image(image_name)
         name = 'image1/trimap.png'
         Trimap = read_Trimap(name)
-        alpha = bayesian_matte(image, Trimap, sigma=8, N=50, minN=10)
+        alpha = Bayesian_Matte1(image, Trimap, sigma=8, N=50, minN=10)
         for row in alpha:
             self.assertGreaterEqual(alpha, 0)
             self.assertLessEqual(alpha, 1)

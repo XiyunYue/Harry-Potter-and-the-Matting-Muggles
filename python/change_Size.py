@@ -3,8 +3,6 @@
 # This file is the function for change alpha colour matrix become to one channel format
 # ==================================================
 "Create a function to change colour to one channel format"
-import numpy as np
-
 
 def change_Size(image):
     '''
