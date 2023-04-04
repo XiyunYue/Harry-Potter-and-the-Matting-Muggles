@@ -16,10 +16,10 @@ from change_Size import change_Size
 from Bayessian_matte1 import Bayesian_Matte1
 from change_background import change_background
 
-trimap_name = 'image4/trimap.png'
+trimap_name = 'image1/trimap.png'
 img_trimap = read_Trimap(trimap_name)
 
-img_name = 'image4/input.png'
+img_name = 'image1/input.png'
 img_input = read_image(img_name)
 
 ##
@@ -47,9 +47,9 @@ output_alpha = change_Size(output_alpha)
 
 # print(output_alpha.shape)
 img_uint8 = (output_alpha * 255).astype(np.uint8)
-cv2.imwrite('image4/output_alpha.png', img_uint8)
+cv2.imwrite('image1/output_alpha.png', img_uint8)
 
-alpha_ground = cv2.imread('image4/groundtruth.png')
+alpha_ground = cv2.imread('image1/groundtruth.png')
 # print(alpha_ground.shape)
 alpha_ground = change_SameColorform(alpha_ground)
 alpha_ground = change_Size(alpha_ground)
@@ -74,6 +74,6 @@ img_new = combining(output_alpha, background_input, img_input)
 cv2.imshow('Composite Image', img_new)
 cv2.waitKey(0)
 img_uint8 = (img_new * 255).astype(np.uint8)
-cv2.imwrite('image4/combining_image.png', img_uint8)
+cv2.imwrite('image1/combining_image.png', img_uint8)
 
 print("Done")
