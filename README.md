@@ -8,9 +8,9 @@ This is a python and matlab implementation of bayesian matting.
 - Opencv
 
 ## Installation and Execution                
-matplotlib==3.6.2
-numpy==1.23.4
-Pillow==9.5.0
+- matplotlib==3.6.2
+- numpy==1.23.4
+- Pillow==9.5.0
 
 ## Running the demo
 - python main.py
