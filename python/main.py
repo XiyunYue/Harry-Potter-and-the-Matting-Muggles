@@ -15,11 +15,14 @@ from change_SameColorform import change_SameColorform
 from change_Size import change_Size
 from Bayessian_matte1 import Bayesian_Matte1
 from change_background import change_background
+import time
+import psutil
 
-trimap_name = 'image1/trimap.png'
+start_time = time.time()
+trimap_name = 'image2/trimap.png'
 img_trimap = read_Trimap(trimap_name)
 
-img_name = 'image1/input.png'
+img_name = 'image2/input.png'
 img_input = read_image(img_name)
 
 ##
@@ -29,7 +32,7 @@ img_input = read_image(img_name)
 ##
 
 output_alpha, unknow = Bayesian_Matte1(img_input, img_trimap)
-plt.imshow(output_alpha, cmap = "gray")
+plt.imshow(output_alpha, cmap="gray")
 plt.show()
 # a = output_alpha.dtype
 # max_value = np.amax(output_alpha)
@@ -47,9 +50,9 @@ output_alpha = change_Size(output_alpha)
 
 # print(output_alpha.shape)
 img_uint8 = (output_alpha * 255).astype(np.uint8)
-cv2.imwrite('image1/output_alpha.png', img_uint8)
+cv2.imwrite('image2/output_alpha.png', img_uint8)
 
-alpha_ground = cv2.imread('image1/groundtruth.png')
+alpha_ground = cv2.imread('image2/groundtruth.png')
 # print(alpha_ground.shape)
 alpha_ground = change_SameColorform(alpha_ground)
 alpha_ground = change_Size(alpha_ground)
@@ -57,7 +60,7 @@ print(alpha_ground.shape)
 
 MSE = MSE_calculation(output_alpha, alpha_ground)
 print("The MSE of our output = ", MSE)
-PSNR = PSNR_calculation(MSE)
+PSNR = PSNR_calculation(output_alpha, alpha_ground)
 print("The PSNR of our output = ", PSNR)
 SAD = SAD_calculation(output_alpha, alpha_ground)
 print("The SAD of our output = ", SAD)
@@ -74,6 +77,17 @@ img_new = combining(output_alpha, background_input, img_input)
 cv2.imshow('Composite Image', img_new)
 cv2.waitKey(0)
 img_uint8 = (img_new * 255).astype(np.uint8)
-cv2.imwrite('image1/combining_image.png', img_uint8)
+cv2.imwrite('image2/combining_image.png', img_uint8)
 
+
+if __name__ == "__main__":
+    pid = psutil.Process().pid
+    memory_info = psutil.Process(pid).memory_info()
+    print("Memory usage of the main program:：")
+    print(f"RSS（resident set size）：{memory_info.rss / 1024 / 1024:.2f} MB")
+    print(f"VMS（virtual memory set）：{memory_info.vms / 1024 / 1024:.2f} MB")
+
+end_time = time.time()
+run_time = end_time - start_time
+print("Running time：", run_time, "s")
 print("Done")
