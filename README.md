@@ -37,7 +37,7 @@ Steps involved in Bayesian Matting:
 - We then use this α value to estimate the F and B values (1’s and 0’s) corresponding to the unknown region which is going to be the desired α matte. 
 - We can use this α matte to further superimpose various backgrounds by our foreground using the composite equation discussed in the math.
 
-## Implementation Steps for each method
+## Implementation steps for each method
 ### Bayesian Matting
 a)	Load the image and trimap (initial segmentation of image into foreground, background, and unknown regions).
 
@@ -77,7 +77,7 @@ Bayesian matting: This method uses a Bayesian framework to estimate the foregrou
 
 Laplacian matting: This method uses a Laplacian equation to solve for the alpha matte, which represents the opacity of each pixel in the foreground object. It relies on the assumption that the color values of the foreground and background regions can be modeled by a linear combination of a small set of basis colors. Laplacian matting can be faster and more robust than Bayesian matting, especially for images with large and smooth background regions, but it may produce artifacts or errors in areas with complex or ambiguous color distributions.
 
-## Proposed End to End and Unit Tests
+## Proposed end to end and unit tests
  Performance Evaluation
 - For the operation of the entire algorithm we propose a time recording to avoid producing an overly complex or inefficient program.
 
