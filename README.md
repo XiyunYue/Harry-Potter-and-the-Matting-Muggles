@@ -1,6 +1,29 @@
-# Harry-Potter-and-the-Matting-Muggles
+# Implementing Bayesian Matting
+This is a python and matlab implementation of bayesian matting. 
 
-## Implementing Bayesian Matting
+## Requirements
+- Python 3.5 +
+- Numpy
+- Matplotlib
+- Opencv
+
+## Installation and Execution                
+matplotlib==3.6.2
+numpy==1.23.4
+Pillow==9.5.0
+
+## Running the demo
+- python main.py
+
+## Running the end to end result
+- python main.py
+
+## Running the unit test
+
+- Test_Quality.py 
+- Test_alpha.py 
+- Test_Trimap.py 
+- Test_window.py
 
 Description of Bayesian Matting
 Bayesian matting is a technique used for image and video editing that allows for the extraction of a foreground object from its background in an image or a video. The algorithm uses a probabilistic model to estimate the foreground and background colors and the alpha matte, which is the per-pixel opacity or transparency of the foreground object.
@@ -67,6 +90,8 @@ Unit test - Algorithms
 - If the output matte has either all 0’s or all 1’s it is invalid. If the output matte has any other value, it is invalid.  
 - Testing whether the color of our extracted foreground changes when combined with the new background. Lastly, check if the algorithm for combining the background is correct.
 
+### Credits
+This code was developed for purely academic purposes as part of the module EEP55C22-202223: COMPUTATIONAL METHODS.
 
 
 
