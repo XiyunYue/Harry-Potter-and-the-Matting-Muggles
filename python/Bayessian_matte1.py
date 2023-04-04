@@ -243,22 +243,4 @@ def Bayesian_Matte1(img,trimap,N = 55,sig = 8,minNeighbours = 10):
             print(N)
 
     return a_channel,n_unknown
-# name = "GT05"
 
-# os.path.join("data","gt_training_lowres","{}.png".format(name))
-
-# image = np.array(Image.open(os.path.join("data","input_training_lowres","{}.png".format(name))))
-# image_trimap = np.array(ImageOps.grayscale(Image.open(os.path.join("data","trimap_training_lowres","{}.png".format(name)))))
-
-# alpha,pixel_count = Bayesian_Matte(image,image_trimap) 
-# alpha *= 255
-
-# image_alpha = np.array(ImageOps.grayscale(Image.open(os.path.join("data","gt_training_lowres","{}.png".format(name))
-# )))
-
-# alpha_int8 = np.array(alpha,dtype = int)
-
-# plt.imsave("{}_alpha.png".format(name), alpha, cmap='gray')
-# show_im(alpha)
-
-# print("Absolute Loss with ground truth - ", np.sum(np.abs(alpha - image_alpha))/(alpha.shape[0]*alpha.shape[1]))

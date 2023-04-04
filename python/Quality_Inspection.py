@@ -12,6 +12,7 @@ def SAD_calculation(result, alpha_ground):
     input the output alpha and calculate the SAD for it
     Args:
         result: numpy.ndarray
+        alpha_ground : numpy.ndarray
     Returns:
         output: numpy.dtype
     '''
@@ -25,6 +26,7 @@ def MSE_calculation(result, alpha_ground):
     input the output alpha and calculate the MSE for it
     Args:
         result: numpy.ndarray
+        alpha_ground : numpy.ndarray
     Returns:
         output: numpy.dtype
     '''
@@ -34,14 +36,19 @@ def MSE_calculation(result, alpha_ground):
     return output
 
 
-def PSNR_calculation(MSE):
+def PSNR_calculation(result, alpha_ground):
     '''
     input the MSE result and calculate the PSNR for it
     Args:
         result: numpy.ndarray
+        alpha_ground : numpy.ndarray
     Returns:
         output: numpy.dtype
     '''
-
-    output = 10 * math.log(1/MSE, 10)
+    max_value = np.amax(result)
+    MSE =  np.mean(np.square(alpha_ground - result))
+    if max_value > 1:
+        output = 10 * math.log(255**2/MSE, 10)
+    else:
+        output = 10 * math.log(1/MSE, 10)
     return output

@@ -32,7 +32,7 @@ Laplacian_alpha = Laplacian_matting(img_trimap, img_input)
 
 MSE = MSE_calculation(Laplacian_alpha, alpha_ground)
 print("The MSE of our output = ", MSE)
-PSNR = PSNR_calculation(MSE)
+PSNR = PSNR_calculation(Laplacian_alpha, alpha_ground)
 print("The PSNR of our output = ", PSNR)
 SAD = SAD_calculation(Laplacian_alpha, alpha_ground)
 print("The SAD of our output = ", SAD)
