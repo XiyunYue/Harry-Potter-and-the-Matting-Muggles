@@ -2,7 +2,7 @@
 
 ## High-level Description of the project
 
-This assignment builds on Assignment 2. We want to detect an image frontground and background by using trimap.
+This assignment builds on Assignment 2. We want to detect an image foreground and background by using a trimap.
 
 ---
 ## Requirements
