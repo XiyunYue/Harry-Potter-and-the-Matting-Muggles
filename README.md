@@ -40,3 +40,7 @@ Bayesian matting: This method uses a Bayesian framework to estimate the foregrou
 
 Laplacian matting: This method uses a Laplacian equation to solve for the alpha matte, which represents the opacity of each pixel in the foreground object. It relies on the assumption that the color values of the foreground and background regions can be modeled by a linear combination of a small set of basis colors. Laplacian matting can be faster and more robust than Bayesian matting, especially for images with large and smooth background regions, but it may produce artifacts or errors in areas with complex or ambiguous color distributions.
 
+## Results
+Below the results of a few images are displayed. The output includes the input image, trimap, output alpha and composite image and provides insights into bayesian matting. The results have been generated based on the input parameters. 
+
+
