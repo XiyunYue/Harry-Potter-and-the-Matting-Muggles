@@ -226,11 +226,14 @@ def Bayesian_Matte1(img,trimap,N = 55,sig = 8,minNeighbours = 6):
         if sum(not_visited[:,2]) == last_n:
             # ChangingWindow Size
             # Preparing the gaussian weights for window
-            N += 10
+            N += 2
+
             # sig += 1 
             gaussian_weights = matlab_style_gauss2d((N,N),sig)
             gaussian_weights /= np.max(gaussian_weights)
             print(N)
+        if N>300:
+            break
 
     return a_channel,n_unknown
 # name = "GT05"
