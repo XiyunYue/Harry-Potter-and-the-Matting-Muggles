@@ -6,16 +6,6 @@ import os
 
 # orchard_bouman_clust.py should be in the folder
 from orchard_bouman_clust import clustFunc
- 
-## Some important helper functions
-
-# This function displays the image.
-def show_im(img):
-    """
-    img - input image should be a numpy array.
-    """
-    plt.imshow(img)
-    plt.show()
 
 
 # Provided by Matlab
@@ -121,7 +111,7 @@ def solve(mu_F, Sigma_F, mu_B, Sigma_B, C, Sigma_C, alpha_init, maxIter = 50, mi
 
                 if like > maxlike:
                     a_best = alpha
-                    maxLike = like
+                    maxlike = like
                     fg_best = F.ravel()
                     bg_best = B.ravel()
 
@@ -132,7 +122,7 @@ def solve(mu_F, Sigma_F, mu_B, Sigma_B, C, Sigma_C, alpha_init, maxIter = 50, mi
                 myiter += 1
     return fg_best, bg_best, a_best 
 
-def Bayesian_Matte1(img,trimap,N = 55,sig = 8,minNeighbours = 10):
+def Bayesian_Matte1(img,trimap,N = 55,sig = 8,minNeighbours = 6):
     '''
     img - input image that the user will give to perform the foreground-background mapping
     trimap - the alpha mapping that is given with foreground and background determined.
@@ -236,11 +226,32 @@ def Bayesian_Matte1(img,trimap,N = 55,sig = 8,minNeighbours = 10):
         if sum(not_visited[:,2]) == last_n:
             # ChangingWindow Size
             # Preparing the gaussian weights for window
-            N += 10
+            N += 2
+
             # sig += 1 
             gaussian_weights = matlab_style_gauss2d((N,N),sig)
             gaussian_weights /= np.max(gaussian_weights)
             print(N)
+        if N>300:
+            break
 
     return a_channel,n_unknown
+# name = "GT05"
 
+# os.path.join("data","gt_training_lowres","{}.png".format(name))
+
+# image = np.array(Image.open(os.path.join("data","input_training_lowres","{}.png".format(name))))
+# image_trimap = np.array(ImageOps.grayscale(Image.open(os.path.join("data","trimap_training_lowres","{}.png".format(name)))))
+
+# alpha,pixel_count = Bayesian_Matte(image,image_trimap) 
+# alpha *= 255
+
+# image_alpha = np.array(ImageOps.grayscale(Image.open(os.path.join("data","gt_training_lowres","{}.png".format(name))
+# )))
+
+# alpha_int8 = np.array(alpha,dtype = int)
+
+# plt.imsave("{}_alpha.png".format(name), alpha, cmap='gray')
+# show_im(alpha)
+
+# print("Absolute Loss with ground truth - ", np.sum(np.abs(alpha - image_alpha))/(alpha.shape[0]*alpha.shape[1]))
