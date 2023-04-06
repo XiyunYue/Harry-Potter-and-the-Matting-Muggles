@@ -139,5 +139,6 @@ Input | Trimap | Output Alpha   |  Composite Image | SAD
 ## Credits
 
 This code was developed for purely academic purposes by Xiaoru Liu (github name: XiyunYue), Asrit Ganti(github name: asritganti), Reldean Williams(github name: Reldean-Williams), as part of the module EEP55C22-202223: COMPUTATIONAL METHODS.
+Consultant: ChatGPT - https://openai.com/blog/chatgpt
 
 https://github.com/XiyunYue/Harry-Potter-and-the-Matting-Muggles.git
