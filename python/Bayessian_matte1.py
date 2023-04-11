@@ -4,18 +4,8 @@ import matplotlib.pyplot as plt
 import cv2
 import os
 
-# orchard_bouman_clust.py should be in the folder
+# orchard_bouman_clust.py which was used given by the marco's code
 from orchard_bouman_clust import clustFunc
- 
-## Some important helper functions
-
-# This function displays the image.
-def show_im(img):
-    """
-    img - input image should be a numpy array.
-    """
-    plt.imshow(img)
-    plt.show()
 
 
 # Provided by Matlab
@@ -34,18 +24,19 @@ def matlab_style_gauss2d(shape=(3, 3), sigma=0.5):
     return h
 
 
-# To get a window where center is (x,y) that is of size (N,N)
+# For a size (N,N) we get a window where center is (x,y)
 def get_window(img,x,y,N=55):
     """
-    Extracts a small window of input image, around the center (x,y)
-    img - input image
-    x,y - cordinates of center
-    N - size of window (N,N) {should be odd}
+    This function retrieves a small window of the input image around the center coordinates (x,y):
+
+    "img": the input image
+    "x" and "y": the coordinates of the center pixel
+    "N": the size of the window to be extracted, which should be an odd number and is represented as (N,N).
     """
 
-    h, w, c = img.shape             # Extracting Image Dimensions
+    h, w, c = img.shape             # defining dimensions
     
-    arm = N//2                      # Arm from center to get window
+    arm = N//2                      # centering around to get the window
     window = np.zeros((N,N,c))      
 
     xmin = max(0,x-arm)
@@ -60,16 +51,18 @@ def get_window(img,x,y,N=55):
 ## To solve individual pixels
 def solve(mu_F, Sigma_F, mu_B, Sigma_B, C, Sigma_C, alpha_init, maxIter = 50, minLike = 1e-6):
     """
-    mu_F - Mean of foreground pixel
-    Sigma_F - Covariance Mat of foreground pixel
-    mu_B, Sigma_B - Mean and Covariance of background pixel
-    C, Sigma_C - Current pixel, and its variance
-    alpha_init - starting alpha value
-    maxIter - Iterations to solve the value of the pixel
-    minLike - min likelihood to reach to stop before maxIterations. 
+    The following are the variables used in solving the pixel value during foreground-background mapping:
+
+    "mu_F": the mean of the foreground pixel
+    "Sigma_F": the covariance matrix of the foreground pixel
+    "mu_B" and "Sigma_B": the mean and covariance of the background pixel
+    "C" and "Sigma_C": the current pixel and its variance
+    "alpha_init": the initial alpha value used for solving
+    "maxIter": the number of iterations to be performed for finding the pixel value
+    "minLike": the minimum likelihood value to be reached before stopping the algorithm before reaching the maximum number of iterations.
     """
 
-    # Initializing Matrices
+    # We initialize the matrices
     I = np.eye(3)
     fg_best = np.zeros(3)
     bg_best = np.zeros(3)
@@ -121,7 +114,7 @@ def solve(mu_F, Sigma_F, mu_B, Sigma_B, C, Sigma_C, alpha_init, maxIter = 50, mi
 
                 if like > maxlike:
                     a_best = alpha
-                    maxLike = like
+                    maxlike = like
                     fg_best = F.ravel()
                     bg_best = B.ravel()
 
@@ -132,24 +125,25 @@ def solve(mu_F, Sigma_F, mu_B, Sigma_B, C, Sigma_C, alpha_init, maxIter = 50, mi
                 myiter += 1
     return fg_best, bg_best, a_best 
 
-def Bayesian_Matte1(img,trimap,N = 55,sig = 8,minNeighbours = 10):
+def Bayesian_Matte1(img,trimap,N = 55,sig = 8,minNeighbours = 6):
     '''
-    img - input image that the user will give to perform the foreground-background mapping
-    trimap - the alpha mapping that is given with foreground and background determined.
-    N - Window size, determines how many pixels will be sampled around the pixel to be solved, should be always odd.
-    sig - wieghts of the neighbouring pixels. less means more centered.
-    minNeighbours - Neigbour pixels available to solve, should be greater than 0, else inverse wont be calculated
+    The following are the parameters for performing foreground-background mapping on an input image given by the user:
+
+    "img": the input image
+    "trimap": an alpha mapping that specifies the foreground and background regions
+    "N": a window size that determines the number of pixels to be sampled around the pixel being solved; it should always be an odd number
+    "sig": weights given to neighboring pixels; lower values mean more emphasis is placed on the central pixel
+    "minNeighbours": the minimum number of neighboring pixels available for solving; it should be greater than 0, or else the inverse cannot be calculated.
     '''
     
     # We Convert the Images to float so that we are able to play with the pixel values
     img = np.array(img,dtype = 'float')
     trimap = np.array(trimap, dtype = 'float')
     
-    # Here we normalise the Images to range from 0 and 1.
+    # From the range 0 and 1, here we normalize the images.
     img /= 255
-    # trimap /= 255
 
-    # We get the dimensions 
+    # defining dimensions
     h,w,c = img.shape
     
     # Preparing the gaussian weights for window
@@ -235,12 +229,12 @@ def Bayesian_Matte1(img,trimap,N = 55,sig = 8,minNeighbours = 10):
 
         if sum(not_visited[:,2]) == last_n:
             # ChangingWindow Size
-            # Preparing the gaussian weights for window
-            N += 10
-            # sig += 1 
+            N += 2
+            # Now we reuse the gaussian weights for the changing window
             gaussian_weights = matlab_style_gauss2d((N,N),sig)
             gaussian_weights /= np.max(gaussian_weights)
             print(N)
+        if N>300:
+            break
 
     return a_channel,n_unknown
-
