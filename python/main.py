@@ -19,10 +19,14 @@ import time
 import psutil
 
 start_time = time.time()
-trimap_name = 'image2/trimap.png'
+picture_number = 'GT01'
+trimap_level = 'lowers/'
+trimap_arrea = 'Trimap1/'
+
+trimap_name = trimap_level + 'trimap/' + trimap_arrea + picture_number + '.png'
 img_trimap = read_Trimap(trimap_name)
 
-img_name = 'image2/input.png'
+img_name = trimap_level + 'input/' + picture_number + '.png'
 img_input = read_image(img_name)
 
 ##
@@ -49,10 +53,13 @@ output_alpha = change_Size(output_alpha)
 
 
 # print(output_alpha.shape)
+output_name = trimap_level + picture_number + '.png'
 img_uint8 = (output_alpha * 255).astype(np.uint8)
-cv2.imwrite('image2/output_alpha.png', img_uint8)
+cv2.imwrite(output_name, img_uint8)
 
-alpha_ground = cv2.imread('image2/groundtruth.png')
+
+alpha_name = trimap_level + 'groundtruth/' + picture_number + '.png'
+alpha_ground = cv2.imread(alpha_name)
 # print(alpha_ground.shape)
 alpha_ground = change_SameColorform(alpha_ground)
 alpha_ground = change_Size(alpha_ground)
@@ -77,7 +84,8 @@ img_new = combining(output_alpha, background_input, img_input)
 cv2.imshow('Composite Image', img_new)
 cv2.waitKey(0)
 img_uint8 = (img_new * 255).astype(np.uint8)
-cv2.imwrite('image2/combining_image.png', img_uint8)
+combining_name = trimap_level + 'combining/' + picture_number + '.png'
+cv2.imwrite('combining_name', img_uint8)
 
 
 if __name__ == "__main__":

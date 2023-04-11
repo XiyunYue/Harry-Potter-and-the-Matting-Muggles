@@ -14,13 +14,18 @@ from Laplacian import Laplacian_matting
 from change_Size import change_Size
 from change_background import change_background
 
-trimap_name = 'image1/trimap.png'
+picture_number = 'GT01'
+trimap_level = 'lowers/'
+trimap_arrea = 'Trimap1/'
+
+trimap_name = trimap_level + 'trimap/' + trimap_arrea + picture_number + '.png'
 img_trimap = read_Trimap(trimap_name)
 
-img_name = 'image1/input.png'
+img_name = trimap_level + 'input/' + picture_number + '.png'
 img_input = read_image(img_name)
 
-alpha_ground = cv2.imread('image1/groundtruth.png')
+alpha_name = trimap_level + 'groundtruth/' + picture_number + '.png'
+alpha_ground = cv2.imread(alpha_name)
 alpha_ground = change_SameColorform(alpha_ground)
 alpha_ground = change_Size(alpha_ground)
 
