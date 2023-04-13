@@ -150,7 +150,7 @@ Below the results of a few images are displayed. The output includes the input i
 
 Input | Trimap | Output Alpha   |  Composite Image | SAD 
 :---:|:---:|:---------:|:--------:|:---:
-![](Input/GT01-input.pngGT01-input.png) |![](Trimap/GT01-trimap.png) |![](Output/GT01-output.png) |  ![](Composite/GT01-composite.png) | 2085.50
+![](Input/GT01-input.png) |![](Trimap/GT01-trimap.png) |![](Output/GT01-output.png) |  ![](Composite/GT01-composite.png) | 2085.50
 ![](Input/GT02-input.png) |![](Trimap/GT02-trimap.png) |![](Output/GT02-output.png) |  ![](Composite/GT02-composite.png) | 9226.60
 ![](Input/GT03-input.png) |![](Trimap/GT03-trimap.png) |![](Output/GT03-output.png) |  ![](Composite/GT03-composite.png) | 9205.31
 ![](Input/GT05-input.png) |![](Trimap/GT05-trimap.png) |![](Output/GT05-output.png) |  ![](Composite/GT05-composite.png) | 2108.46
