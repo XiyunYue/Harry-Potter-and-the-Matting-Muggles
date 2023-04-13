@@ -120,20 +120,45 @@ Unit test - Algorithms
 
 - Testing whether the color of our extracted foreground changes when combined with the new background. Lastly, check if the algorithm for combining the background is correct.
 
+Unit test - Test Quality
+
+- SE_calculation
+- PSNR_calculation
+- SAD_calculation
+
+Unit test - Test Trimap
+
+- Test trimap is a function for testing the form for a trimap. The function checks if the value is between 0 and 1.
+
+Unit test - Test Alpha
+
+- This is a function test to compare two images to see if they are the same size.
+
+Unit test - Test Window
+
+- Test window is a function test for the different window sizes.
+
+End to End test Quality Inspection
+
+- To calculate the different quality assessments for the output of each image.
+Laplacian
+
+Function test for Laplacian matting.
+
 ### Results
 Below the results of a few images are displayed. The output includes the input image, trimap, output alpha and composite image and provides insights into bayesian matting. The results have been generated based on the input parameters.
 
 Input | Trimap | Output Alpha   |  Composite Image | SAD 
 :---:|:---:|:---------:|:--------:|:---:
-![](GT01-input.png) |![](GT01-trimap.png) |![](GT01-output.png) |  ![](GT01-composite.png) | 2085.50
-![](GT02-input.png) |![](GT02-trimap.png) |![](GT02-output.png) |  ![](GT02-composite.png) | 9226.60
-![](GT03-input.png) |![](GT03-trimap.png) |![](GT03-output.png) |  ![](GT03-composite.png) | 9205.31
-![](GT05-input.png) |![](GT05-trimap.png) |![](GT05-output.png) |  ![](GT05-composite.png) | 2108.46
-![](GT06-input.png) |![](GT06-trimap.png) |![](GT06-output.png) |  ![](GT06-composite.png) | 5426.96
-![](GT07-input.png) |![](GT07-trimap.png) |![](GT07-output.png) |  ![](GT07-composite.png) | 4860.54
-![](GT08-input.png) |![](GT08-trimap.png) |![](GT08-output.png) |  ![](GT08-composite.png) | 28402.85
-![](GT09-input.png) |![](GT09-trimap.png) |![](GT09-output.png) |  ![](GT09-composite.png) | 7655.57
-![](GT11-input.png) |![](GT11-trimap.png) |![](GT11-output.png) |  ![](GT11-composite.png) | 9026.66
+![](Input/GT01-input.pngGT01-input.png) |![](Trimap/GT01-trimap.png) |![](Output/GT01-output.png) |  ![](Composite/GT01-composite.png) | 2085.50
+![](Input/GT02-input.png) |![](Trimap/GT02-trimap.png) |![](Output/GT02-output.png) |  ![](Composite/GT02-composite.png) | 9226.60
+![](Input/GT03-input.png) |![](Trimap/GT03-trimap.png) |![](Output/GT03-output.png) |  ![](Composite/GT03-composite.png) | 9205.31
+![](Input/GT05-input.png) |![](Trimap/GT05-trimap.png) |![](Output/GT05-output.png) |  ![](Composite/GT05-composite.png) | 2108.46
+![](Input/GT06-input.png) |![](Trimap/GT06-trimap.png) |![](Output/GT06-output.png) |  ![](Composite/GT06-composite.png) | 5426.96
+![](Input/GT07-input.png) |![](Trimap/GT07-trimap.png) |![](Output/GT07-output.png) |  ![](Composite/GT07-composite.png) | 4860.54
+![](Input/GT08-input.png) |![](Trimap/GT08-trimap.png) |![](Output/GT08-output.png) |  ![](Composite/GT08-composite.png) | 28402.85
+![](Input/GT09-input.png) |![](Trimap/GT09-trimap.png) |![](Output/GT09-output.png) |  ![](Composite/GT09-composite.png) | 7655.57
+![](Input/GT11-input.png) |![](Trimap/GT11-trimap.png) |![](Output/GT11-output.png) |  ![](Composite/GT11-composite.png) | 9026.66
 
 ---
 ## Credits
